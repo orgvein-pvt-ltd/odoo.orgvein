@@ -1,0 +1,29 @@
+# Odoo Core - Don't commit
+odoo17/
+
+# Configuration with passwords
+odoo.conf
+
+# Logs
+*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Odoo runtime
+filestore/
+sessions/
+
+# Docker volumes data (will be in Docker volumes)
+pgdata/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,25 @@
+# Ignore Odoo core files (we don't need them in Docker)
+odoo17/
+
+# Ignore Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore logs
+*.log
+
+# Ignore local config
+odoo.conf
+
+# Ignore data
+filestore/
+sessions/
+
+# Ignore git
+.git/
+.gitignore
+
+# Ignore IDE
+.vscode/
+.idea/
