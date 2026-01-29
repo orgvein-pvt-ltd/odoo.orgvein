@@ -3,6 +3,7 @@ odoo17/
 
 # Configuration with passwords
 odoo.conf
+odoo.config
 orgvien.conf
 
 # Logs
