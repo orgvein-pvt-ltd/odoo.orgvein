@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+
+    <!-- Check-in / Check-out Popup -->
+    <t t-name="hr_attendance_break.AttendancePopup" owl="1">
+        <div class="att_popup_overlay" t-on-click.self="close">
+            <div t-attf-class="att_popup_card {{ props.action === 'check_out' ? 'is-checkout' : '' }}">
+
+                <!-- CHECK IN -->
+                <t t-if="props.action === 'check_in'">
+                    <span class="att_popup_emoji">👋</span>
+                    <h2>Good <t t-esc="timeOfDay"/>!</h2>
+                    <p class="att_popup_sub">
+                        Welcome, <strong><t t-esc="props.employeeName"/></strong>
+                    </p>
+                    <p class="att_popup_sub">Have a productive day ahead.</p>
+                    <div class="att_popup_time"><t t-esc="props.time"/></div>
+                    <button class="att_popup_btn btn-checkin" t-on-click="close">
+                        Let's Go ✅
+                    </button>
+                </t>
+
+                <!-- CHECK OUT -->
+                <t t-if="props.action === 'check_out'">
+                    <span class="att_popup_emoji">🌅</span>
+                    <h2>Goodbye!</h2>
+                    <p class="att_popup_sub">
+                        See you, <strong><t t-esc="props.employeeName"/></strong>!
+                    </p>
+                    <div class="att_popup_stats">
+                        <div>
+                            <div class="att_stat_label">⏱ Worked Today</div>
+                            <div class="att_stat_value"><t t-esc="props.worked"/></div>
+                        </div>
+                    </div>
+                    <button class="att_popup_btn btn-checkout" t-on-click="close">
+                        Done for Today 👍
+                    </button>
+                </t>
+
+            </div>
+        </div>
+    </t>
+
+</templates>

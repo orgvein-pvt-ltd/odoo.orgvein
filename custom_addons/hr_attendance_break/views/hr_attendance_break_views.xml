@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Break Tree View -->
+    <record id="view_hr_attendance_break_tree" model="ir.ui.view">
+        <field name="name">hr.attendance.break.tree</field>
+        <field name="model">hr.attendance.break</field>
+        <field name="arch" type="xml">
+            <tree string="Breaks" default_order="break_start desc">
+                <field name="employee_id"/>
+                <field name="attendance_id"/>
+                <field name="break_start"/>
+                <field name="break_end"/>
+                <field name="break_duration" string="Duration (hrs)" widget="float_time"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Break Form View -->
+    <record id="view_hr_attendance_break_form" model="ir.ui.view">
+        <field name="name">hr.attendance.break.form</field>
+        <field name="model">hr.attendance.break</field>
+        <field name="arch" type="xml">
+            <form string="Break">
+                <sheet>
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="attendance_id"/>
+                        <field name="break_start"/>
+                        <field name="break_end"/>
+                        <field name="break_duration" widget="float_time"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Inject Breaks into Attendance Form -->
+    <record id="view_hr_attendance_form_inherit_break" model="ir.ui.view">
+        <field name="name">hr.attendance.form.inherit.break</field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <separator string="Break Records"/>
+                <field name="on_break" invisible="1"/>
+                <field name="break_ids" nolabel="1">
+                    <tree string="Breaks" editable="bottom">
+                        <field name="break_start" string="Break Start"/>
+                        <field name="break_end" string="Break End"/>
+                        <field name="break_duration" string="Duration (hrs)" widget="float_time"/>
+                    </tree>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_hr_attendance_break" model="ir.actions.act_window">
+        <field name="name">Attendance Breaks</field>
+        <field name="res_model">hr.attendance.break</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem
+        id="menu_hr_attendance_break"
+        name="Breaks"
+        parent="hr_attendance.menu_hr_attendance_root"
+        action="action_hr_attendance_break"
+        sequence="20"/>
+
+</odoo>

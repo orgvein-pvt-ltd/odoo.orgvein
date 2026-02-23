@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="hr_attendance_break.BreakSystray" owl="1">
+        <div
+            class="o_systray_item o_hr_attendance_break"
+            role="button"
+            t-if="state.visible"
+            t-on-click="toggleBreak"
+            t-att-title="state.onBreak ? 'Resume work' : 'Take a break'"
+        >
+            <t t-if="state.loading">
+                <i class="fa fa-spinner fa-spin"/>
+            </t>
+            <t t-else="">
+                <i class="fa"
+                   t-att-class="state.onBreak
+                       ? 'fa-coffee text-warning'
+                       : 'fa-play text-success'"/>
+                <span class="ms-1" t-esc="state.onBreak ? 'Resume' : 'Break'"/>
+            </t>
+        </div>
+    </t>
+
+</templates>
