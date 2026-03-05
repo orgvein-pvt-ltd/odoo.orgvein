@@ -1,0 +1,99 @@
+<templates xml:space="preserve">
+    <t t-name="sdm_birthday_notification.SystrayDropdown">
+        <div t-ref="root" class="birthday-notification-container dropdown d-flex align-items-center position-relative">
+
+            <!-- Systray Icon Button -->
+            <button class="btn btn-link position-relative o_mail_discuss_systray bday-systray-btn"
+                    type="button"
+                    t-on-click="toggleDropdown">
+                <i class="fa fa-birthday-cake text-light" style="font-size:18px;"></i>
+
+                <!-- RED DOT — visible to ALL users when someone has birthday today and not yet acknowledged -->
+                <span t-if="state.showDot and !state.acknowledged"
+                      class="bday-notif-dot">
+                    <t t-esc="state.todayBirthdays.length"/>
+                </span>
+
+                <!-- HR ONLY — upcoming count badge -->
+                <span t-if="state.upcomingCount > 0 and !state.acknowledged"
+                      class="o-mail-MessagingMenu-counter badge rounded-pill">
+                    <t t-esc="state.upcomingCount"/>
+                </span>
+            </button>
+
+            <!-- Dropdown Panel -->
+            <div t-if="state.open" class="birthday-dropdown-panel">
+
+                <div class="bday-panel-header">
+                    🎂 BIRTHDAY REMINDER 🎂
+                </div>
+
+                <!-- TODAY'S BIRTHDAYS — visible to ALL users -->
+                <t t-if="state.todayBirthdays.length">
+                    <div class="bday-section-title">🎉 Today's Birthdays</div>
+                    <t t-foreach="state.todayBirthdays" t-as="emp" t-key="emp.id">
+                        <div class="bday-item bday-item-today">
+                            <div class="crown_avatar" style="display:inline-block;position:relative;">
+                                <span class="bday_crown" style="font-size:16px;top:-14px;">👑</span>
+                                <img t-if="emp.image_128"
+                                     t-att-src="'data:image/png;base64,' + emp.image_128"
+                                     class="bday-avatar"/>
+                                <div t-else="" class="bday-avatar-placeholder">🎂</div>
+                            </div>
+                            <div class="bday-info">
+                                <strong class="bday-name-today">
+                                    🎂 <t t-esc="emp.name"/>
+                                </strong>
+                                <div class="bday-sub">🎉 Birthday Today!</div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- UPCOMING BIRTHDAYS — HR only -->
+                <t t-if="state.birthdays.length">
+                    <hr class="bday-divider"/>
+                    <div class="bday-section-title">📅 Upcoming Birthdays</div>
+                    <t t-foreach="state.birthdays" t-as="employee" t-key="employee.id">
+                        <div t-att-class="'bday-item' + (employee.isToday ? ' bday-item-today' : '')">
+                            <img t-if="employee.image_url"
+                                 t-att-src="employee.image_url"
+                                 class="bday-avatar"/>
+                            <div t-else="" class="bday-avatar-placeholder">
+                                <i class="fa fa-user-circle" style="font-size:36px;color:#14f4f4;"/>
+                            </div>
+                            <div class="bday-info">
+                                <strong t-att-class="employee.isToday ? 'bday-name-today' : 'bday-name'">
+                                    <t t-if="employee.isToday">🎂 </t>
+                                    <t t-esc="employee.name"/>
+                                </strong>
+                                <div class="bday-sub">
+                                    <span><t t-esc="employee.birthdayLabel"/></span>
+                                    <span class="bday-days">
+                                        <t t-if="employee.daysRemaining === 0">Today! 🎉</t>
+                                        <t t-else="">in <t t-esc="employee.daysRemaining"/> days</t>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <!-- EMPTY STATE -->
+                <t t-if="!state.birthdays.length and !state.todayBirthdays.length">
+                    <div class="bday-empty">🎈 No upcoming birthdays.</div>
+                </t>
+
+                <!-- OK BUTTON — clears the notification dot and closes dropdown -->
+                <t t-if="state.todayBirthdays.length or state.birthdays.length">
+                    <div style="text-align:center; margin-top:12px;">
+                        <button class="bday-ok-btn" t-on-click="acknowledgeNotification">
+                            ✅ OK, Got it!
+                        </button>
+                    </div>
+                </t>
+
+            </div>
+        </div>
+    </t>
+</templates>
