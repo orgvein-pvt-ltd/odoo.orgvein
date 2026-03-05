@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_manager_project,project.manager.project,project.model_project_project,group_project_manager_custom,1,1,1,0
+access_project_manager_task,project.manager.task,project.model_project_task,group_project_manager_custom,1,1,1,1
+access_project_manager_member,project.manager.member,project.model_project_collaborator,group_project_manager_custom,1,1,1,1
+access_project_manager_analytic,project.manager.analytic,analytic.model_account_analytic_account,group_project_manager_custom,1,1,1,0
+access_project_manager_analytic_line,project.manager.analytic.line,analytic.model_account_analytic_line,group_project_manager_custom,1,1,1,0

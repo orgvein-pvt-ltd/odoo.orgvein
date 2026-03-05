@@ -1,0 +1,549 @@
+/* ════════════════════════════════════════════════════════════════
+   SYSTRAY DROPDOWN PANEL
+════════════════════════════════════════════════════════════════ */
+
+.birthday-notification-container {
+    position: relative;
+}
+
+.birthday-dropdown-panel {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    background-color: #0D1B2A;
+    border: 1px solid #12e4e4;
+    padding: 12px;
+    min-width: 320px;
+    max-height: 520px;
+    overflow-y: auto;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    border-radius: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: #0ae8e8 #0D1B2A;
+}
+
+.birthday-dropdown-panel::-webkit-scrollbar { width: 6px; }
+.birthday-dropdown-panel::-webkit-scrollbar-thumb {
+    background-color: #11e4e4;
+    border-radius: 4px;
+}
+.birthday-dropdown-panel::-webkit-scrollbar-track { background: #0D1B2A; }
+
+/* Panel Header */
+.bday-panel-header {
+    text-align: center;
+    color: #12e4e4;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 4px 0 10px;
+    border-bottom: 1px solid rgba(18, 228, 228, 0.3);
+    margin-bottom: 10px;
+}
+
+/* Section Title */
+.bday-section-title {
+    color: #d2a10f;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-left: 2px;
+}
+
+.bday-divider {
+    border-color: rgba(18, 228, 228, 0.2);
+    margin: 10px 0;
+}
+
+/* Birthday Item Row */
+.bday-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+    background: rgba(255,255,255,0.04);
+    transition: background 0.2s;
+}
+
+.bday-item:hover {
+    background: rgba(18, 228, 228, 0.12);
+}
+
+.bday-item-today {
+    background: rgba(210, 161, 15, 0.12) !important;
+    border: 1px solid rgba(210, 161, 15, 0.4);
+}
+
+/* Avatar */
+.bday-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #14f4f4;
+    flex-shrink: 0;
+}
+
+.bday-avatar-placeholder {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(18,228,228,0.1);
+    border: 2px solid #14f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+/* Info */
+.bday-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.bday-name {
+    color: #f0f0f0;
+    font-size: 13px;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bday-name-today {
+    color: #d2a10f;
+    font-size: 13px;
+    font-weight: 700;
+    display: block;
+}
+
+.bday-sub {
+    color: #888;
+    font-size: 11px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2px;
+}
+
+.bday-days {
+    color: #12e4e4;
+    font-weight: 600;
+}
+
+/* Badge */
+.birthday-notification-container .o-mail-MessagingMenu-counter.badge.rounded-pill {
+    color: #0D1B2A !important;
+    background-color: #d2a10f !important;
+    font-size: 11px;
+    padding: 2px 6px;
+    font-weight: 700;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+/* Empty state */
+.bday-empty {
+    text-align: center;
+    color: #666;
+    padding: 20px 0;
+    font-size: 13px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   CROWN ANIMATION
+════════════════════════════════════════════════════════════════ */
+
+.crown_avatar {
+    position: relative;
+}
+
+.bday_crown {
+    position: absolute;
+    top: -22px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 26px;
+    z-index: 5;
+    animation: crownFloat 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+@keyframes crownFloat {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(-5px); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BIRTHDAY POPUP OVERLAY
+════════════════════════════════════════════════════════════════ */
+
+.bday_overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99998;
+    animation: bday_fadein 0.5s ease;
+}
+
+.bday_overlay.bday_fadeout {
+    animation: bday_fadeout 0.5s ease forwards;
+}
+
+@keyframes bday_fadein {
+    from { opacity: 0; transform: scale(0.9); }
+    to   { opacity: 1; transform: scale(1);   }
+}
+
+@keyframes bday_fadeout {
+    from { opacity: 1; transform: scale(1);   }
+    to   { opacity: 0; transform: scale(0.9); }
+}
+
+/* Card */
+.bday_card {
+    background: linear-gradient(160deg, #1a2a4a 0%, #162038 60%, #1a2a3a 100%);
+    border: 1.5px solid #d4a017;
+    border-radius: 16px;
+    padding: 40px 36px 32px;
+    max-width: 420px;
+    width: 92%;
+    text-align: center;
+    box-shadow:
+        0 0 30px rgba(212, 160, 23, 0.15),
+        0 20px 60px rgba(0, 0, 0, 0.6);
+    animation: cardPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: visible;
+}
+
+@keyframes cardPop {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1);   opacity: 1; }
+}
+
+/* Avatar in popup */
+.bday_card .crown_avatar {
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-top: 16px;
+}
+
+.bday_card .bday_crown {
+    font-size: 32px;
+    top: -28px;
+}
+
+.bday_avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #5a7a9a;
+    box-shadow: 0 0 12px rgba(90, 122, 154, 0.3);
+}
+
+.bday_avatar_placeholder {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: rgba(18,228,228,0.1);
+    border: 3px solid #5a7a9a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+}
+
+/* Balloons */
+.bday_balloons {
+    font-size: 28px;
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+    animation: balloonBounce 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes balloonBounce {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-8px); }
+}
+
+/* Title */
+.bday_title {
+    font-size: 32px;
+    font-weight: 800;
+    background: none;
+
+
+    color: #d4a017;
+
+
+    margin: 0 0 6px;
+}
+
+@keyframes shimmer {
+    from { background-position: 0% center;   }
+    to   { background-position: 200% center; }
+}
+
+/* Name */
+.bday_name {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    font-weight: 600;
+    margin: 4px 0 12px;
+}
+
+/* Wish text */
+.bday_wish {
+    font-size: 14px;
+    color: #a0aec0;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+/* Close button */
+.bday_close_btn {
+    background: linear-gradient(135deg, #d4a017, #b8860b);
+    color: #0D1B2A;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(212,160,23,0.35);
+}
+
+.bday_close_btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 6px 20px rgba(212,160,23,0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .bday_card {
+        padding: 30px 20px 24px;
+    }
+    .bday_title {
+        font-size: 24px;
+    }
+    .birthday-dropdown-panel {
+        min-width: 280px;
+        right: -60px;
+    }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PROGRESS BAR (counts down song duration)
+════════════════════════════════════════════════════════════════ */
+.bday_progress_wrap {
+    background: rgba(255,255,255,0.1);
+    border-radius: 50px;
+    height: 4px;
+    margin-bottom: 18px;
+    overflow: hidden;
+}
+.bday_progress_bar {
+    height: 100%;
+    background: linear-gradient(90deg, #d4a017, #b8860b);
+    border-radius: 50px;
+    width: 100%;
+    animation: bdayCountdown 16s linear forwards;
+}
+@keyframes bdayCountdown {
+    from { width: 100%; }
+    to   { width: 0%; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   NOTIFICATION DOT — shown when someone has birthday today
+════════════════════════════════════════════════════════════════ */
+.bday-notif-dot {
+    position: absolute;
+    top: 2px;
+    right: 0px;
+    background: #e53e3e;
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    min-width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 3px;
+    border: 1.5px solid #1a1a2e;
+    animation: bdayDotPulse 1.5s ease-in-out infinite;
+    z-index: 10;
+}
+
+@keyframes bdayDotPulse {
+    0%,100% { transform: scale(1);    box-shadow: 0 0 0 0 rgba(229,62,62,0.6); }
+    50%      { transform: scale(1.15); box-shadow: 0 0 0 5px rgba(229,62,62,0); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MORE BALLOONS
+════════════════════════════════════════════════════════════════ */
+.bday_balloons2 {
+    font-size: 22px;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    animation: balloonBounce 1.5s ease-in-out infinite alternate-reverse;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   3 BALLOON ROWS
+════════════════════════════════════════════════════════════════ */
+.bday_balloons1 {
+    font-size: clamp(18px,5vw,28px);
+    letter-spacing: clamp(2px,1.5vw,6px);
+    margin-bottom: 4px;
+    animation: balloonUp 1.4s ease-in-out infinite alternate;
+}
+.bday_balloons2 {
+    font-size: clamp(16px,4vw,24px);
+    letter-spacing: clamp(2px,1.2vw,5px);
+    margin-bottom: 4px;
+    animation: balloonDown 1.6s ease-in-out infinite alternate;
+}
+.bday_balloons3 {
+    font-size: clamp(13px,3.5vw,20px);
+    letter-spacing: clamp(2px,1vw,4px);
+    margin-bottom: 10px;
+    animation: balloonUp 1.8s ease-in-out infinite alternate;
+}
+@keyframes balloonUp   { from{transform:translateY(0)} to{transform:translateY(-8px)} }
+@keyframes balloonDown { from{transform:translateY(0)} to{transform:translateY(8px)}  }
+
+/* ════════════════════════════════════════════════════════════════
+   FLOATING SIDE BALLOONS
+════════════════════════════════════════════════════════════════ */
+.bday_float_left, .bday_float_right {
+    position: absolute;
+    font-size: clamp(18px,4vw,26px);
+    animation: floatSide 3s ease-in-out infinite alternate;
+    pointer-events: none;
+}
+.bday_float_left  { left:10px;  top:40%; }
+.bday_float_right { right:10px; top:30%; animation-delay:0.8s; }
+@keyframes floatSide {
+    from{transform:translateY(0) rotate(-5deg)}
+    to{transform:translateY(-14px) rotate(5deg)}
+}
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE COMPATIBILITY
+════════════════════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+    /* Card fills screen nicely */
+    .bday_card {
+        padding: 28px 16px 22px !important;
+        border-radius: 14px !important;
+        max-height: 92vh;
+        overflow-y: auto;
+    }
+    /* Smaller avatar */
+    .bday_avatar,
+    .bday_avatar_placeholder {
+        width: 80px !important;
+        height: 80px !important;
+    }
+    /* Smaller title */
+    .bday_title { font-size: 24px !important; }
+    .bday_name  { font-size: 17px !important; }
+    .bday_wish  { font-size: 12px !important; }
+
+    /* Hide side balloons on very small screens */
+    .bday_float_left,
+    .bday_float_right { display: none; }
+
+    /* Dropdown full width on mobile */
+    .birthday-dropdown-panel {
+        position: fixed !important;
+        top: 56px !important;
+        left: 8px !important;
+        right: 8px !important;
+        min-width: unset !important;
+        max-height: 75vh !important;
+    }
+
+    /* Bigger tap target for close button */
+    .bday_close_btn {
+        padding: 13px 30px !important;
+        font-size: 15px !important;
+        min-width: 150px;
+    }
+}
+
+@media (max-width: 360px) {
+    .bday_balloons1 { font-size: 16px; letter-spacing: 2px; }
+    .bday_balloons2 { font-size: 14px; letter-spacing: 2px; }
+    .bday_balloons3 { font-size: 12px; letter-spacing: 1px; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   BALLOONS FLYING BOTTOM TO TOP INSIDE POPUP CARD
+════════════════════════════════════════════════════════════════ */
+.card-balloon {
+    position: absolute;
+    font-size: clamp(18px,4vw,26px);
+    bottom: -40px;
+    pointer-events: none;
+    animation: cardBalloonFly linear infinite;
+    opacity: 0;
+    z-index: 1;
+}
+.card-balloon:nth-child(1) { left:5%;   animation-duration:4s;   animation-delay:0s;   }
+.card-balloon:nth-child(2) { left:22%;  animation-duration:5s;   animation-delay:1s;   font-size:20px; }
+.card-balloon:nth-child(3) { left:68%;  animation-duration:4.5s; animation-delay:0.5s; }
+.card-balloon:nth-child(4) { left:83%;  animation-duration:3.5s; animation-delay:1.5s; font-size:18px; }
+.card-balloon:nth-child(5) { left:44%;  animation-duration:5s;   animation-delay:2s;   }
+
+@keyframes cardBalloonFly {
+    0%   { transform:translateY(0)      rotate(-8deg); opacity:0;   }
+    10%  { opacity: 0.8; }
+    90%  { opacity: 0.5; }
+    100% { transform:translateY(-520px) rotate(8deg);  opacity:0;   }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   OK GOT IT BUTTON
+════════════════════════════════════════════════════════════════ */
+.bday-ok-btn {
+    background: linear-gradient(135deg, #d4a017, #b8860b);
+    color: #0D1B2A;
+    border: none;
+    padding: 8px 28px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 10px rgba(212,160,23,0.35);
+    margin-bottom: 4px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+.bday-ok-btn:hover,
+.bday-ok-btn:active {
+    transform: scale(1.05);
+    box-shadow: 0 5px 14px rgba(212,160,23,0.5);
+}

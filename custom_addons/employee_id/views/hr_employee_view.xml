@@ -1,0 +1,33 @@
+<odoo>
+    <record id="view_employee_form_inherit_custom_id"
+            model="ir.ui.view">
+
+        <field name="name">hr.employee.form.custom.id</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='work_email']" position="after">
+                <field name="employee_custom_id" string="Employee ID"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="view_employee_public_form_inherit_custom_id"
+        model="ir.ui.view">
+
+        <field name="name">hr.employee.public.form.custom.id</field>
+        <field name="model">hr.employee.public</field>
+        <field name="inherit_id" ref="hr.hr_employee_public_view_form"/>
+
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='work_email']" position="after">
+                <field name="employee_custom_id" readonly="1" string="Employee ID"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,156 @@
+.att_popup_overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: att_fadein 0.25s ease;
+}
+
+@keyframes att_fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.att_popup_card {
+    background: linear-gradient(135deg, #ffffff 0%, #f0f4ff 100%);
+    border-radius: 24px;
+    padding: 48px 56px;
+    min-width: 360px;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: 0 32px 80px rgba(99, 102, 241, 0.25), 0 8px 24px rgba(0,0,0,0.12);
+    border-top: 6px solid #6366f1;
+    animation: att_slideup 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.att_popup_card.is-checkout {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fff4 100%);
+    border-top-color: #22c55e;
+    box-shadow: 0 32px 80px rgba(34, 197, 94, 0.2), 0 8px 24px rgba(0,0,0,0.12);
+}
+
+@keyframes att_slideup {
+    from { transform: translateY(60px) scale(0.95); opacity: 0; }
+    to   { transform: translateY(0) scale(1);       opacity: 1; }
+}
+
+.att_popup_emoji {
+    font-size: 60px;
+    display: block;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.att_popup_card h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 0 0 8px;
+    letter-spacing: -0.5px;
+}
+
+.att_popup_card.is-checkout h2 {
+    color: #14532d;
+}
+
+.att_popup_sub {
+    color: #64748b;
+    font-size: 15px;
+    margin: 4px 0;
+    line-height: 1.5;
+}
+
+.att_popup_sub strong {
+    color: #6366f1;
+    font-weight: 700;
+}
+
+.att_popup_card.is-checkout .att_popup_sub strong {
+    color: #16a34a;
+}
+
+.att_popup_time {
+    font-size: 44px;
+    font-weight: 800;
+    color: #1e1b4b;
+    margin: 20px 0;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.att_popup_card.is-checkout .att_popup_time {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.att_popup_stats {
+    display: flex;
+    justify-content: center;
+    gap: 36px;
+    margin: 16px 0 24px;
+    padding: 16px 24px;
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 14px;
+}
+
+.att_stat_label {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.att_stat_value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #16a34a;
+    font-variant-numeric: tabular-nums;
+}
+
+.att_popup_btn {
+    display: inline-block;
+    padding: 14px 40px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    margin-top: 8px;
+    transition: transform 0.15s, box-shadow 0.15s, opacity 0.15s;
+    letter-spacing: 0.02em;
+}
+
+.att_popup_btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    opacity: 0.92;
+}
+
+.att_popup_btn:active {
+    transform: translateY(0);
+}
+
+.att_popup_btn.btn-checkin {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.4);
+}
+
+.att_popup_btn.btn-checkout {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(34, 197, 94, 0.4);
+}
